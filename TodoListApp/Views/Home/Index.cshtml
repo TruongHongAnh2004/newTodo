@@ -1,0 +1,26 @@
+﻿@model IEnumerable<TodoListApp.Models.Todo>
+
+<h1>Todo List</h1>
+<a asp-action="Create" class="btn btn-primary">Add New Todo</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Is Completed</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todo in Model)
+        {
+            <tr>
+                <td>@todo.Title</td>
+                <td>@todo.IsCompleted</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@todo.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@todo.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

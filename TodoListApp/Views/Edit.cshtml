@@ -1,0 +1,24 @@
+﻿public async Task<IActionResult> Edit(int? id)
+{
+    if (id == null) return NotFound();
+
+    var todo = await _context.Todos.FindAsync(id);
+    if (todo == null) return NotFound();
+
+    return View(todo);
+}
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, Todo todo)
+{
+    if (id != todo.Id) return NotFound();
+
+    if (ModelState.IsValid)
+    {
+        _context.Update(todo);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+    return View(todo);
+}
